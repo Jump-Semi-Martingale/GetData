@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-var ans1:String? = "D"
+var ans1:NSArray?
 var keepAlive = true
 
 class StockMemos: NSObject {
@@ -39,13 +39,12 @@ class StockMemos: NSObject {
             
             
             
-            //let JSON = response.result.value
-                        
+            let JSON = response.result.value as! NSArray //JSON全体はDictionaryではなくArray型
+            let JSONnum = JSON.count //array型なのでcountで要素数取得可能
             
-            //ans1 = JSON!["temp"] as! String
-        
-            
-            print(ans1)
+            let ans1=JSON[JSONnum-1] as! NSDictionary　//JSONの各要素はDictionary型
+            print(ans1["end_price"])
+            print(ans1["t_date"])
             
             keepAlive = false
             
@@ -59,7 +58,7 @@ class StockMemos: NSObject {
                //  0.1秒毎の処理なので、処理が止まらない
         }
 
-       return ans1!
+       return "0"
         
     }
 }
