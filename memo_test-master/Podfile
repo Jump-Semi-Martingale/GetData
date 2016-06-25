@@ -5,5 +5,6 @@ use_frameworks!
 
 target 'memo_test' do
 	pod 'Alamofire'
+	pod 'Charts'
 end
 
