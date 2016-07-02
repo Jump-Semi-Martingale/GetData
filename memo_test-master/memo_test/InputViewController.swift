@@ -48,7 +48,7 @@ class InputViewController: UIViewController {
         let unitsSold = value
         
         lineChartView.animate(yAxisDuration: 2.0)
-        lineChartView.descriptionText = "京都府の月毎の降水量グラフ"
+        lineChartView.descriptionText = "日次株価"
         
         setChart(months, values: unitsSold)
 
@@ -73,7 +73,7 @@ class InputViewController: UIViewController {
             dataEntries.append(dataEntry)
         }
         
-        let chartDataSet = LineChartDataSet(yVals: dataEntries, label: "降水量")
+        let chartDataSet = LineChartDataSet(yVals: dataEntries, label: "Price")
         let chartData = LineChartData(xVals: months, dataSet: chartDataSet)
         lineChartView.data = chartData
     }

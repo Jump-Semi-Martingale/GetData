@@ -51,7 +51,7 @@ class StockMemos: NSObject {
             
             
             for i in 1 ... JSONnum {
-                var ans1=JSON[JSONnum-i] as! NSDictionary //JSONの各要素はDictionary型
+                var ans1=JSON[i-1] as! NSDictionary //JSONの各要素はDictionary型
                 
                 var ans2temp:String = String(ans1["end_price"]!)
                 ans2 += [Double(ans2temp)!]
