@@ -37,9 +37,14 @@ class InputViewController: UIViewController {
         
         
         
+        let date: [String]! = vc2Array[1] as! [String]
         
-        months = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
-        let unitsSold = [50.3, 68.3, 113.3, 115.7, 160.8, 214.0, 220.4, 132.1, 176.2, 120.9, 71.3, 48.0]
+        
+        
+        //months = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
+        months = date
+        //let unitsSold = [50.3, 68.3, 113.3, 115.7, 160.8, 214.0, 220.4, 132.1, 176.2, 120.9, 71.3, 48.0]
+        let unitsSold = [50.3, 68.3, 113.3, 115.7]
         
         lineChartView.animate(yAxisDuration: 2.0)
         lineChartView.descriptionText = "京都府の月毎の降水量グラフ"

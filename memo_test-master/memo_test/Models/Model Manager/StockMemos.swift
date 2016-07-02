@@ -20,7 +20,9 @@ class StockMemos: NSObject {
     class func postMemo(memo: Memo) -> NSArray {
     
     
-        var ans2:[String] = []
+        var ans2:[Double] = []
+        var ans3:[String] = []
+        
         
         var params: [String: AnyObject] = [
             "sec_code": memo.seccode,
@@ -51,9 +53,11 @@ class StockMemos: NSObject {
             for i in 1 ... JSONnum {
                 var ans1=JSON[JSONnum-i] as! NSDictionary //JSONの各要素はDictionary型
                 
-                ans2 += [String(ans1["end_price"]!)]
-                
-                print(ans2)
+                var ans2temp:String = String(ans1["end_price"]!)
+                ans2 += [Double(ans2temp)!]
+                ans3 += [String(ans1["t_date"]!)]
+                print([ans2, ans3])
+
             }
             
             keepAlive = false
@@ -68,7 +72,7 @@ class StockMemos: NSObject {
                //  0.1秒毎の処理なので、処理が止まらない
         }
 
-       return ans2
+       return [ans2, ans3]
         
     }
 }
