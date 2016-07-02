@@ -12,6 +12,9 @@ class ViewController: UIViewController {
     
     
     var toVC2Text = "from VC1"
+    var toVC2Array :NSArray = []
+    
+    
     
     @IBOutlet weak var TextView1: UITextView!
     
@@ -44,8 +47,8 @@ class ViewController: UIViewController {
         memo.seccode = TextView1.text
         memo.fromdate = TextView2.text
         memo.todate = TextView4.text
-        memo.text3 = StockMemos.postMemo(memo)
-        TextView3.text = memo.text3
+        //memo.text3 = StockMemos.postMemo(memo)
+        //TextView3.text = memo.text3
 
     }
     
@@ -60,12 +63,17 @@ class ViewController: UIViewController {
             memo.seccode = TextView1.text
             memo.fromdate = TextView2.text
             memo.todate = TextView4.text
-            memo.text3 = StockMemos.postMemo(memo)
-            TextView3.text = memo.text3
+            //memo.text3 = StockMemos.postMemo(memo)
+            //TextView3.text = memo.text3
             
-            toVC2Text = memo.text3
+            //toVC2Text = memo.text3
             
             vc2.vc2Text = toVC2Text
+            
+            toVC2Array = StockMemos.postMemo(memo)
+            vc2.vc2Array = toVC2Array
+            
+            
         }
     }
     

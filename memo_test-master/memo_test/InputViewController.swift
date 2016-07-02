@@ -21,6 +21,8 @@ class InputViewController: UIViewController {
 
     var vc2Text:String?
     
+    var vc2Array:NSArray = []
+    
     var months: [String]!
 
     
@@ -30,7 +32,7 @@ class InputViewController: UIViewController {
         // Do any additional setup after loading the view.
         if vc2Text != nil {
             // ViewControllerからのメッセージを表示する
-            TextView5.text = vc2Text
+            TextView5.text = String(vc2Array)
         }
         
         
