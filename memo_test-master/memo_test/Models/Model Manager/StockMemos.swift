@@ -3,6 +3,7 @@
 //  memo_test
 //
 //  Created by 橋本欣典 on 2016/04/16.
+//  Revised by D.Mita on 2016/07/09.
 //  Copyright © 2016年 橋本欣典. All rights reserved.
 //
 
@@ -16,14 +17,12 @@ class StockMemos: NSObject {
     
     
     // 保存ボタンが押されたときに呼ばれるメソッドを定義
-    //class func postMemo(memo: Memo) -> String {
     class func postMemo(memo: Memo) -> NSArray {
     
     
         var ans2:[Double] = []
         var ans3:[String] = []
         
-        print("temp")
         
         var params: [String: AnyObject] = [
             "sec_code": memo.seccode,
@@ -35,13 +34,10 @@ class StockMemos: NSObject {
         
         // HTTP通信
         Alamofire.request(.POST, "http://54.199.174.85:3000/api/swiftdisplays", parameters: params, encoding: .URL).responseJSON { response in
-            
-        //Alamofire.request(.POST, "http://54.199.174.85:3000/api/memos", parameters: params, encoding: .URL).responseJSON { response in
-        
-        //Alamofire.request(.POST, "http://localhost:3000/api/memos", parameters: params, encoding: .URL).responseJSON { response in
+        //http://54.199.174.85:3000/api/memos
+        //http://localhost:3000/api/memos
             
             print("=============response============")
-            //print(response)
             
             
             
@@ -59,11 +55,9 @@ class StockMemos: NSObject {
                 var ans2temp:String = String(ans1["end_price"]!)
                 ans2 += [Double(ans2temp)!]
                 ans3 += [String(ans1["t_date"]!)]
-                //print([ans2, ans3])
 
             }
             
-            //keepAlive = false
             
             dispatch_semaphore_signal(semaphore)
             
@@ -75,11 +69,6 @@ class StockMemos: NSObject {
             NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 10))
         }
         
-        //let runLoop = NSRunLoop.currentRunLoop()
-        //while keepAlive &&
-        //    runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 1.0)) {
-               //  0.1秒毎の処理なので、処理が止まらない
-        //}
 
        return [ans2, ans3]
         

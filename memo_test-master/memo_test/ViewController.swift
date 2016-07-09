@@ -3,6 +3,7 @@
 //  memo_test
 //
 //  Created by 橋本欣典 on 2016/04/14.
+//  Revised by D.Mita on 2016/07/09
 //  Copyright © 2016年 橋本欣典. All rights reserved.
 //
 
@@ -43,12 +44,6 @@ class ViewController: UIViewController {
     
     
     @IBAction func tapSaveBtn(sender: UIButton) {
-        //let memo = Memo()
-        //memo.seccode = TextView1.text
-        //memo.fromdate = TextView2.text
-        //memo.todate = TextView4.text
-        //memo.text3 = StockMemos.postMemo(memo)
-        //TextView3.text = memo.text3
         print("tapSavebtn")
 
     }
@@ -61,19 +56,12 @@ class ViewController: UIViewController {
             
             print("Segue_in")
             let memo = Memo()
-            //let InputView = InputViewController()
             memo.seccode = TextView1.text
             memo.fromdate = TextView2.text
             memo.todate = TextView4.text
-            //memo.text3 = StockMemos.postMemo(memo)
-            //TextView3.text = memo.text3
-            
-            //toVC2Text = memo.text3
             
             vc2.vc2Text = toVC2Text
-            print("postMemo")
             toVC2Array = StockMemos.postMemo(memo)
-            print("postMemo_end")
             vc2.vc2Array = toVC2Array
             
             

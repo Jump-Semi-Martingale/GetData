@@ -2,7 +2,7 @@
 //  InputViewController.swift
 //  memo_test
 //
-//  Created by Fujiwara on 2016/06/19.
+//  Created by D.Mita on 2016/06/19.
 //  Copyright © 2016年 橋本欣典. All rights reserved.
 //
 
