@@ -23,12 +23,15 @@ class StockMemos: NSObject {
         var ans2:[Double] = []
         var ans3:[String] = []
         
+        print("temp")
         
         var params: [String: AnyObject] = [
             "sec_code": memo.seccode,
             "from_date": memo.fromdate,
             "to_date": memo.todate
         ]
+        
+        let semaphore = dispatch_semaphore_create(0)
         
         // HTTP通信
         Alamofire.request(.POST, "http://54.199.174.85:3000/api/swiftdisplays", parameters: params, encoding: .URL).responseJSON { response in
@@ -38,12 +41,12 @@ class StockMemos: NSObject {
         //Alamofire.request(.POST, "http://localhost:3000/api/memos", parameters: params, encoding: .URL).responseJSON { response in
             
             print("=============response============")
-            print(response)
+            //print(response)
             
             
             
-            let JSON = response.result.value as! NSArray //JSON全体はDictionaryではなくArray型
-            let JSONnum = JSON.count //array型なのでcountで要素数取得可能
+            var JSON = response.result.value as! NSArray //JSON全体はDictionaryではなくArray型
+            var JSONnum = JSON.count //array型なのでcountで要素数取得可能
             
             //let ans1=JSON[JSONnum-1] as! NSDictionary //JSONの各要素はDictionary型
             //print(ans1["end_price"])
@@ -56,21 +59,27 @@ class StockMemos: NSObject {
                 var ans2temp:String = String(ans1["end_price"]!)
                 ans2 += [Double(ans2temp)!]
                 ans3 += [String(ans1["t_date"]!)]
-                print([ans2, ans3])
+                //print([ans2, ans3])
 
             }
             
-            keepAlive = false
+            //keepAlive = false
             
-            
+            dispatch_semaphore_signal(semaphore)
             
         }
         
-        let runLoop = NSRunLoop.currentRunLoop()
-        while keepAlive &&
-            runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 1.0)) {
-               //  0.1秒毎の処理なので、処理が止まらない
+        
+        //Wait for the request to complete
+        while dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW) != 0 {
+            NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 10))
         }
+        
+        //let runLoop = NSRunLoop.currentRunLoop()
+        //while keepAlive &&
+        //    runLoop.runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 1.0)) {
+               //  0.1秒毎の処理なので、処理が止まらない
+        //}
 
        return [ans2, ans3]
         
